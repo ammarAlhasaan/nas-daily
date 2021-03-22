@@ -1,14 +1,22 @@
 import React, {useState} from 'react';
-import {connect} from "react-redux";
+import './App.css';
+import MainLayout from "./components/layouts/MainLayout";
+import {BrowserRouter, Route} from "react-router-dom";
+
+export const loading = (
+    <div className="loader">
+        <div className="loader"></div>
+    </div>
+)
 
 function App(props: any) {
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6">Test</div>
-                <div className="col-md-6">Nas</div>
-            </div>
-        </div>
+        <React.Suspense fallback={loading}>
+            <BrowserRouter>
+                <Route path="/" key="Site" render={props => <MainLayout title="main" {...props}/>} />
+            </BrowserRouter>
+        </React.Suspense>
+
     );
 }
 
